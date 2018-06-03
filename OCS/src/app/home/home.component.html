@@ -1,0 +1,20 @@
+<header>
+  <h1 class="storeTitle">Welcome to OCS!</h1>
+</header>
+
+<section id="home">
+  <carousel [interval]="myInterval" [noWrap]="noWrapSlides" [(activeSlide)]="activeSlideIndex"
+            [showIndicators]="showIndicator">
+    <slide *ngFor="let banner of Banners; let index = index" class="item">
+      <app-carousel image="{{ banner.imagePath }}" title="{{ banner.title }}"
+                    description="{{ banner.description }}"></app-carousel>
+    </slide>
+  </carousel>
+</section>
+
+<section>
+  <div id="homeBtn">
+    <div class="enterLink linkBtn badge"><a routerLink="/store" routerLinkActive="active">Go to Store</a></div>
+    <canvas #arrow id="arrow"></canvas>
+  </div>
+</section>

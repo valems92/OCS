@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: 'centabel';
+  src: url('./assets/fonts/centabel.eot');
+  src: url('./assets/fonts/centabel.eot?#iefix') format('embedded-opentype'), url('./assets/fonts/centabelBook.woff') format('woff'), url('./assets/fonts/centabelBook.ttf') format('truetype'), url('./assets/fonts/centabelBook.svg#glyphicons-halflingsregular') format('svg');
+}
+
+body {
+  font-family: 'centabel' !important;
+  overflow-x: hidden;
+}
+
+h1.storeTitle {
+  text-align: center;
+}
+
+.storeTitle {
+  text-shadow: 0 2px 6px rgb(96, 94, 94);
+  color: #8c2044;
+}
+
+.customBtn {
+  background-color: #8c2044;
+  border-color: transparent;
+}
+
+.backdrop {
+  position: fixed !important;
+}

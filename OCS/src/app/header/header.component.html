@@ -1,0 +1,25 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a routerLink="/" routerLinkActive="active" class="navbar-brand">OCS</a>
+        </div>
+
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a routerLink="/store" routerLinkActive="active">Store</a></li>
+                <li><a routerLink="/about-us" routerLinkActive="active">About Us</a></li>
+            </ul>
+
+            <ul *ngIf="logged" class="nav navbar-nav navbar-right">
+                <li><a routerLink="/cart" routerLinkActive="active">Cart</a></li>
+                <li><a routerLink="/statistics" routerLinkActive="active">Statistics</a></li>
+                <li *ngIf="admin"><a routerLink="/admin-space" routerLinkActive="active">Manage</a></li>
+                <li><a class="glyphicon glyphicon-user" aria-hidden="true" routerLink="/profile"></a></li>
+            </ul>
+
+            <ul *ngIf="!logged" class="nav navbar-nav navbar-right">
+                <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
