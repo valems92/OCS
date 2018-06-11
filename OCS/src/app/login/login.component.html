@@ -1,0 +1,51 @@
+<ngx-loading [show]="loading"></ngx-loading>
+
+<div class="row" width="100%">
+    <div class="col-md-6 loginCol">
+        <h1 class="storeTitle">Login</h1>
+        <form (submit)="onLogin($event)" ngNativeValidate>
+            <div class="form-group">
+                <label>Email</label>
+                <input class="form-control" name="email" type="email" [(ngModel)]="loginEmail" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input class="form-control" name="password" type="password" [(ngModel)]="loginPassword" required>
+            </div>
+            <p>
+                <input type="submit" value="Login" class="customBtn btn btn-primary"/>
+            </p>
+        </form>
+    </div>
+
+    <div class="col-md-6 loginCol">
+        <h1 class="storeTitle">Register</h1>
+        <form (submit)="onRegister($event)" ngNativeValidate>
+            <div class="form-group">
+                <label>Full Name</label>
+                <input class="form-control" name="fullName" type="text" [(ngModel)]="regFullName" required>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input class="form-control" name="email" type="email" [(ngModel)]="regEmail" required>
+            </div>
+            <div class="form-group has-error" [class.has-error]="!validPassword">
+                <label>Password</label>
+                <input class="form-control" name="password" type="password" [(ngModel)]="regPassword" required>
+            </div>
+            <div class="form-group">
+                <label>City</label>
+                <input class="form-control" name="city" type="text" [(ngModel)]="regCity" required>
+            </div>
+            <div class="form-group">
+                <label>Address</label>
+                <input class="form-control" name="address" type="text" [(ngModel)]="regAddress" required>
+            </div>
+            <p>
+                <input type="submit" value="Register" class="customBtn btn btn-primary"/>
+            </p>
+        </form>
+    </div>
+</div>
+
+<app-alert #childAlert [message]="alertMsg" [isSuccess]="isAlertSuccess"></app-alert>

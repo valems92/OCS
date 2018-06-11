@@ -1,0 +1,26 @@
+<div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true" (onHide)="onCloseClothInfo()">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Cloth Information</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row" *ngIf="cloth">
+          <app-cloth [cloth]="cloth" columns="{{columns}}"></app-cloth>
+          <div class="col-md-{{12 - columns}}">
+            <app-chat #chatModal [cloth]="cloth"></app-chat>
+            <div class="addToCart">
+              <button class="customBtn btn btn-primary" (click)="onAddToCart()">Add To Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-alert #childAlert [message]="alertMsg" [isSuccess]="isAlertSuccess"></app-alert>
+</div>

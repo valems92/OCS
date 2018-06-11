@@ -1,0 +1,31 @@
+<div class="col-md-3">
+    <form class="filterForm" (submit)="onFilter($event)" ngNativeValidate>
+        <p>
+            <label>Provider</label>
+            <select [(ngModel)]="providerSelected" name="provider" class="form-control">
+                <option>All</option>
+                <option *ngFor="let provider of providers">
+                    {{provider}}
+                </option>
+            </select>
+        </p>
+        <p>
+            <label>Color</label>
+            <select [(ngModel)]="colorSelected" name="color" class="form-control">
+                <option>All</option>
+                <option *ngFor="let color of colors">
+                    {{color}}
+                </option>
+            </select>
+        </p>
+        <p>
+            <label for="price">Price</label>
+            <output name="ageOutputName" id="priceOutputId">{{maxPrice}}</output>
+            <input class="form-control priceFilter" type="range" id="price" min="0" max="{{ maxPrice }}"
+                   [(ngModel)]="selectedPrice" name="price" oninput="priceOutputId.value = price.value">
+        </p>
+        <p>
+            <input type="submit" value="Filter" class="customBtn btn btn-primary"/>
+        </p>
+    </form>
+</div>

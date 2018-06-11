@@ -1,0 +1,66 @@
+.chatArea {
+  border: 1px solid #dedede;
+  margin: 2% 1%;
+  border-radius: 10px;
+  padding: 7px 0 0 0;
+  height: 335px;
+  overflow: hidden;
+  position: relative;
+}
+
+.messages {
+  margin: 1% 1%;
+  padding: 7px;
+
+  height: 80%;
+  overflow: scroll;
+}
+
+.message {
+  border: 2px solid #dedede;
+  background-color: #dedede;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 10px 5px 2px 5px;
+  overflow: scroll;
+}
+
+.darker {
+  border-color: #bfa8b0;
+  background-color: #bfa8b0;
+}
+
+.message::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.inputMessage {
+  outline: none;
+  width: 90%;
+  bottom: 0;
+  height: 14%;
+  background-color: antiquewhite;
+  border: none;
+  padding: 10px;
+  -webkit-appearance: none;
+  position: absolute;
+}
+
+.send {
+  outline: none;
+  background-color: #dcc8ae;
+  border: none;
+  border-radius: 0;
+  width: 10%;
+  height: 14%;
+  right: 0;
+  position: absolute;
+  bottom: 0;
+}
+
+.send:active {
+  border: none;
+  outline: none;
+}

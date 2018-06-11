@@ -1,0 +1,6 @@
+<div class="col-md-9">
+    <app-cloth *ngFor="let cloth of clothes" [cloth]="cloth" columns="{{ columns }}"
+               (click)="childModal.show(cloth);"></app-cloth>
+</div>
+
+<app-cloth-info #childModal></app-cloth-info>

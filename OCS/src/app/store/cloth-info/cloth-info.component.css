@@ -1,0 +1,7 @@
+.addToCart {
+  text-align: center;
+}
+
+app-cloth ::ng-deep .clothContainer{
+  cursor: default !important;
+}

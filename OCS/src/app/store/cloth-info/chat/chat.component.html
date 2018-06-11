@@ -1,0 +1,13 @@
+<div class="chatArea" (close)="onCloseChat($event)">
+  <ul #messages class="messages">
+
+    <div *ngFor="let m of allMessages; let index = index; let odd = odd;" class="message"
+         [ngClass]="{ darker: odd }">
+      <p><b>{{ m.userName }}: </b>{{ m.message }}</p>
+    </div>
+  </ul>
+
+  <input #inputMessage class="inputMessage" placeholder="{{placeHolder}}"
+         [disabled]="!isEnabled" (keypress)="onInputChange()" (keydown.enter)="onSend()"/>
+  <input class="btn send" type="button" value="Send" [disabled]="!isEnabled" (click)="onSend()"/>
+</div>
