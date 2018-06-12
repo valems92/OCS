@@ -1,0 +1,23 @@
+<header>
+  <h1 class="storeTitle">Statistics</h1>
+</header>
+
+<section>
+  <h3 id="chartTitle" class="storeTitle">Number of sold items:</h3>
+  <div class="Purchases">
+    <div class="names">
+      <div *ngFor="let data of providersSale">{{ data.provider }}:</div>
+    </div>
+    <div class="chart"></div>
+  </div>
+</section>
+
+<hr/>
+
+<section>
+  <h3 id="canvasTitle" class="storeTitle">Clothes's colors purchases:</h3>
+  <svg width="300" height="300"></svg>
+</section>
+
+<app-alert #childAlert [message]="alertMsg" [isSuccess]="isAlertSuccess"></app-alert>
+

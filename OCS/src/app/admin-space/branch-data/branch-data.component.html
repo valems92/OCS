@@ -1,0 +1,28 @@
+<div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{title}}</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form (submit)="onSaveChanges()" ngNativeValidate>
+          <div class="form-group">
+            <label>Latitude</label>
+            <input type="number" step="0.0000001" min="-90" max="90" class="form-control" name="latitude" [(ngModel)]="latitude" required>
+          </div>
+          <div class="form-group">
+            <label>Longitude</label>
+            <input type="number" step="0.0000001" min="-180" max="180" class="form-control" name="longitude" [(ngModel)]="longitude" required>
+          </div>
+          <p>
+            <input type="submit" value="Save" class="customBtn btn btn-primary"/>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

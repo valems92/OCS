@@ -1,0 +1,25 @@
+<h3 class="storeTitle">Evaluation of product sales</h3>
+<form id="salesEvaluation" (submit)="predictProductSales($event)">
+  <div class="form-group">
+    <label>Provider</label>
+    <select class="form-control" name="provider" [(ngModel)]="selectedProvider">
+      <option *ngFor="let provider of objectKeys(providersData)">{{provider}}</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Color</label>
+    <select class="form-control" name="color" [(ngModel)]="selectedColor">
+      <option *ngFor="let color of colors" [attr.selected]="color == selectedColor">{{color}}</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Price</label>
+    <input class="form-control" type="number" id="price" min="0" step="0.01" name="price" [(ngModel)]="selectedPrice"
+           required/>
+  </div>
+
+  <input class="customBtn btn btn-primary" type="submit" id="predictBtn" value="Evaluate"/>
+  <div *ngIf="valuation !== null" type="text" [ngClass]="valuation ? 'glyphicon-ok' : 'glyphicon-remove'" class="glyphicon" id="valuation"></div>
+</form>

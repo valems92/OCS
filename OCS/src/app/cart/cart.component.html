@@ -1,0 +1,24 @@
+<ngx-loading [show]="loading"></ngx-loading>
+
+<header>
+  <h1 class="storeTitle">Cart</h1>
+</header>
+
+<section id="cartBuySection" *ngIf="totalPrice > 0">
+  <button class="customBtn btn btn-primary" (click)="buyCartConfirmation()">Buy</button>
+  <span><b>Total Price: </b> {{ totalPrice }} </span>
+
+  <app-modal #childModal [content]="modalContent" [title]="'Remove from cart'"
+             (closeEvent)="onConfirmationClosed($event)"></app-modal>
+</section>
+
+<hr>
+
+<section>
+  <app-cloth *ngFor="let cloth of clothes" [cloth]="cloth" columns="{{ columns }}"
+             (click)="openRemoveFromCartConfirmation(cloth)"></app-cloth>
+</section>
+
+<hr>
+
+<app-alert #childAlert [message]="alertMsg" [isSuccess]="isAlertSuccess"></app-alert>

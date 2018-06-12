@@ -1,0 +1,19 @@
+.clothImage {
+    position: relative;
+    width: 50px;
+    height:auto;
+}
+
+.clothImage:hover {
+    width:200px;
+    display:block;
+    z-index:999;
+}
+
+.glyphicon {
+    cursor: pointer;
+}
+
+.actionIconsCell {
+    text-align: center;
+}

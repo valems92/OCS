@@ -1,0 +1,7 @@
+<div *ngIf="!isSuccess && !isHidden" class="alert fade in alert-dismissable alert-danger">
+    {{message}}
+</div>
+
+<div *ngIf="isSuccess && !isHidden" class="alert fade in alert-dismissable alert-success">
+    {{message}}
+</div>

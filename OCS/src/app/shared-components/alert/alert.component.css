@@ -1,0 +1,9 @@
+.alert {
+    position: fixed;
+    margin: 2em;
+    bottom: 2%;
+    left: 35%;
+    right: 35%;
+    text-align: center;
+    z-index: 1000;
+}

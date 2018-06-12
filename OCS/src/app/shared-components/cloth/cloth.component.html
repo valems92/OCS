@@ -1,0 +1,10 @@
+<div href="#" class="col-md-{{ columns }}">
+    <div class="clothContainer">
+        <!-- <div class="clothImage" style="background-image: url({{ cloth.imagePath }})"></div>-->
+        <div [ngStyle]="{'background-image': 'url(' + cloth.imagePath + ')'}" class="clothImage"></div>
+        <div>{{ cloth.provider }}</div>
+        <span title={{cloth.description}}>{{ cloth.description }}</span>
+        <div>Price: {{ cloth.price }}$</div>
+        <div>Color: {{ cloth.color }}</div>
+    </div>
+</div>

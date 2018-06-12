@@ -1,0 +1,25 @@
+<div class="panel panel-default">
+  <div class="storeTitle panel-heading">Branches</div>
+  <table class="table table-striped table-condensed">
+    <thead class="">
+    <tr class="danger">
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>Title</th>
+      <th width="60">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let branch of branches">
+      <td>{{ branch.lat }}</td>
+      <td>{{ branch.lng }}</td>
+      <td>{{ branch.title }}</td>
+      <td class="actionIconsCell">
+        <span class="glyphicon glyphicon-trash" aria-hidden="true" (click)="onDeleteBranch(branch)"></span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-alert #childAlert [message]="alertMsg" [isSuccess]="isAlertSuccess"></app-alert>

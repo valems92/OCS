@@ -1,0 +1,32 @@
+<div class="panel panel-default">
+  <div class="storeTitle panel-heading">{{ providerName }}</div>
+  <table class="table table-striped table-condensed">
+    <thead class="">
+    <tr class="danger">
+      <th>Image</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Color</th>
+      <th width="60">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let cloth of providerClothes">
+      <td>
+        <img class="clothImage" src="{{ cloth.imagePath }}">
+      </td>
+      <td>{{ cloth.description }}</td>
+      <td>{{ cloth.price }}$</td>
+      <td>{{ cloth.color }}</td>
+      <td class="actionIconsCell">
+        <span class="glyphicon glyphicon-trash" aria-hidden="true" (click)="onDeleteCloth(cloth)"></span>
+        <span class="glyphicon glyphicon-pencil" aria-hidden="true" (click)="childModal.show(cloth);"></span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-cloth-data #childModal [title]="'Update Cloth'" (addClothEvent)="onUpdateCloth($event)"></app-cloth-data>
+
+<app-alert #childAlert [message]="alertMsg" [isSuccess]="isAlertSuccess"></app-alert>

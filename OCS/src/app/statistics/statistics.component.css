@@ -1,0 +1,18 @@
+
+.chart /deep/ div {
+  background-color: #8c2044;
+  border-radius: 5px;
+  padding: 5px 14px;
+  margin-bottom: 3px;
+  color: white;
+  display: table;
+  text-align: right;
+}
+
+.names {
+  font-size: 16px;
+  line-height: 31px;
+  margin-right: 10px;
+  float: left;
+}
+
