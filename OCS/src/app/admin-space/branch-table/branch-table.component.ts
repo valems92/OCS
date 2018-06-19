@@ -32,21 +32,22 @@ export class BranchTableComponent implements OnInit {
   onDeleteBranch(branch) {
     this.setLoading.next(true);
 
-    const id = branch.id;
-    this.branchService.deleteBranch(id, (res) => {
+    var id = branch.id;
+    var self =this;
+    this.branchService.deleteBranch(id, function (res) {
       if (res.status === "error")
-        this.showAlert(res.message, false);
+        self.showAlert(res.message, false);
       else {
-        let newBranchArray = this.branches.filter(function (obj) {
+        var newBranchArray = self.branches.filter(function (obj) {
           return obj["id"] !== id;
         });
 
-        this.branches = (newBranchArray.length > 0) ? newBranchArray : [];
+        self.branches = (newBranchArray.length > 0) ? newBranchArray : [];
 
-        this.showAlert("The branch was deleted", true);
+        self.showAlert("The branch was deleted", true);
       }
 
-      this.setLoading.next(false);
+      self.setLoading.next(false);
     });
   }
 }

@@ -42,9 +42,9 @@ import {ChatComponent} from './store/cloth-info/chat/chat.component';
 import {StatisticsComponent} from './statistics/statistics.component';
 import { EvaluationComponent } from './admin-space/evaluation/evaluation.component';
 
-const config: SocketIoConfig = {url: 'http://localhost:3000', options: {}};
+var config: SocketIoConfig = {url: 'http://localhost:3000', options: {}};
 
-const appRoutes: Routes = [
+var appRoutes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
   {path: 'store', component: StoreComponent},
@@ -100,5 +100,6 @@ const appRoutes: Routes = [
   providers: [UserService, ClothService, CartService, BranchService, ChatService, OnlyLoggedInUsersGuard, OnlyAdminUsersGuard],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
 }

@@ -19,10 +19,11 @@ export class AboutUsComponent implements OnInit {
   branches: Branch[] = [];
 
   constructor(private branchService: BranchService) {
-    branchService.branchesChangeEvent.subscribe((value) => {
-      this.branches = value;
+    var self = this;
+    branchService.branchesChangeEvent.subscribe(function(value) {
+      self.branches = value;
 
-      this.addMarkers();
+      self.addMarkers();
     });
   }
 
@@ -31,10 +32,10 @@ export class AboutUsComponent implements OnInit {
   }
 
   initMap(branch) {
-    let lat = branch ? branch.lat : 0;
-    let lng = branch ? branch.lng : 0;
+    var lat = branch ? branch.lat : 0;
+    var lng = branch ? branch.lng : 0;
 
-    let mapProp = {
+    var mapProp = {
       center: new google.maps.LatLng(lat, lng),
       zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -47,8 +48,8 @@ export class AboutUsComponent implements OnInit {
 
   addMarkers() {
     if (this.map) {
-      for (let i = 0; i < this.branches.length; i++) {
-        let branch = this.branches[i];
+      for (var i = 0; i < this.branches.length; i++) {
+        var branch = this.branches[i];
 
         new google.maps.Marker({
           map: this.map,

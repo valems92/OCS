@@ -43,13 +43,13 @@ export class ClothInfoComponent {
   }
 
   onAddToCart() {
+    var self = this;
     this.cartService.addToCart(this.cloth.id).subscribe(
-      res => {
-        this.showAlert("Cloth was added to cart", true);
-        // alert
+      function (res) {
+        self.showAlert("Cloth was added to cart", true);
       },
-      err => {
-        this.showAlert(err.error.message, false);
+      function (err) {
+        self.showAlert(err.error.message, false);
       }
     )
   }

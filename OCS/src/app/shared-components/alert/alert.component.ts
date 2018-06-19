@@ -1,34 +1,35 @@
-import {Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
-    selector: 'app-alert',
-    templateUrl: './alert.component.html',
-    styleUrls: ['./alert.component.css']
+  selector: 'app-alert',
+  templateUrl: './alert.component.html',
+  styleUrls: ['./alert.component.css']
 })
 export class AlertComponent implements OnInit {
-    @Input() isSuccess: boolean;
-    @Input() message: string;
+  @Input() isSuccess: boolean;
+  @Input() message: string;
 
-    isHidden:boolean = true;
+  isHidden: boolean = true;
 
-    constructor() {
+  constructor() {
+  }
+
+  ngOnInit() {
+  }
+
+  show() {
+    if (!this.message || this.message.length === 0) {
+      this.message = (this.isSuccess) ? "Success!" : "A general error occurred";
     }
 
-    ngOnInit() {
-    }
+    this.isHidden = false;
+    this.dismiss();
+  }
 
-    show() {
-        if (!this.message || this.message.length === 0) {
-            this.message = (this.isSuccess) ? "Success!" : "A general error occurred";
-        }
-
-        this.isHidden = false;
-        this.dismiss();
-    }
-
-    dismiss() {
-        setTimeout(() => {
-            this.isHidden = true;
-        }, 4000)
-    }
+  dismiss() {
+    var self = this;
+    setTimeout(function() {
+      self.isHidden = true;
+    }, 4000)
+  }
 }

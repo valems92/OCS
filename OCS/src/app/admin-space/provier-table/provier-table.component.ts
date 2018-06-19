@@ -34,33 +34,36 @@ export class ProvierTableComponent implements OnInit {
 
     onDeleteCloth(cloth) {
         this.setLoading.next(true);
-        const id = cloth.id;
-        this.clothService.deleteCloth(id, (res) => {
+        var id = cloth.id;
+        var self = this;
+
+        this.clothService.deleteCloth(id, function(res) {
             if (res.status === "error")
-                this.showAlert(res.message, false);
+                self.showAlert(res.message, false);
             else {
-                let newClothesArray = this.providerClothes.filter(function (obj) {
+                var newClothesArray = self.providerClothes.filter(function (obj) {
                     return obj["id"] !== id;
                 });
 
-                this.providerClothes = (newClothesArray.length > 0) ? newClothesArray : [];
+                self.providerClothes = (newClothesArray.length > 0) ? newClothesArray : [];
 
-                this.showAlert("The cloth was deleted", true);
+                self.showAlert("The cloth was deleted", true);
             }
 
-            this.setLoading.next(false);
+            self.setLoading.next(false);
         });
     }
 
     onUpdateCloth(data) {
         this.setLoading.next(true);
-        this.clothService.updateCloth(data, (res) => {
+        var self = this;
+        this.clothService.updateCloth(data, function(res) {
             if (res.status === "error")
-                this.showAlert(res.message, false);
+                self.showAlert(res.message, false);
             else
-                this.showAlert("The cloth was updated", true);
+                self.showAlert("The cloth was updated", true);
 
-            this.setLoading.next(false);
+            self.setLoading.next(false);
         });
     }
 }

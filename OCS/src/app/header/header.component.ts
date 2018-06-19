@@ -12,8 +12,9 @@ export class HeaderComponent implements OnInit {
     admin:boolean = false;
 
     constructor (private userService: UserService) {
-        userService.event.subscribe((value) => {
-            this.isLogged(value);
+      var self = this;
+        userService.event.subscribe(function(value) {
+            self.isLogged(value);
         });
     }
 

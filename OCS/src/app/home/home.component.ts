@@ -16,8 +16,8 @@ export class HomeComponent implements OnInit {
   showIndicator: boolean = true;
   noWrapSlides: boolean = false;
   Banners: Banner[] = [
-    new Banner("Description1", require("../../assets/images/banner1.jpg"), "Title1"),
-    new Banner("Description2", require("../../assets/images/banner2.jpg"), "Title2")
+    new Banner("You won't find better cloth!", require("../../assets/images/banner1.jpg"), "Best Cloth!"),
+    new Banner("Best prices, best quality!", require("../../assets/images/banner2.jpg"), "Buy Now!")
   ];
 
   constructor() {

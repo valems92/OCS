@@ -33,7 +33,7 @@ export class BranchDataComponent implements OnInit {
   }
 
   onSaveChanges() {
-    let data = {
+    var data = {
       lat: this.latitude,
       lng: this.longitude
     };

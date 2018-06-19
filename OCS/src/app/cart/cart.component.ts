@@ -30,12 +30,13 @@ export class CartComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.cartService.getCart((res) => {
+      var self = this;
+        this.cartService.getCart(function(res) {
             if (res.status === "error") {
-                this.showAlert(res.message, true);
+                self.showAlert(res.message, true);
             } else {
-                this.clothes = res.cart;
-                this.calculateTotalPrice();
+                self.clothes = res.cart;
+                self.calculateTotalPrice();
             }
         })
     }
@@ -75,23 +76,25 @@ export class CartComponent implements OnInit {
 
     removeClothFromCart() {
         this.loading = true;
-        let id = this.selectedCloth.id;
+        var id = this.selectedCloth.id;
+
+        var self = this;
         this.cartService.removeFromCart(id).subscribe(
-            res => {
-                for (let i = 0; i < this.clothes.length; i++) {
-                    if(this.clothes[i].id === id) {
-                        this.totalPrice -= this.clothes[i].price;
-                        this.clothes.splice(i, 1);
+            function(res) {
+                for (var i = 0; i < self.clothes.length; i++) {
+                    if(self.clothes[i].id === id) {
+                        self.totalPrice -= self.clothes[i].price;
+                        self.clothes.splice(i, 1);
 
                         break;
                     }
                 }
-                this.showAlert("The cloth was removed form you cart", true);
-                this.loading = false;
+                self.showAlert("The cloth was removed form you cart", true);
+                self.loading = false;
             },
-            err => {
-                this.showAlert(err.error.message, false);
-                this.loading = false;
+            function(err) {
+                self.showAlert(err.error.message, false);
+                self.loading = false;
             }
         )
     }
@@ -100,23 +103,25 @@ export class CartComponent implements OnInit {
     calculateTotalPrice() {
         this.totalPrice = 0;
 
-        for (let i = 0; i < this.clothes.length; i++) {
+        for (var i = 0; i < this.clothes.length; i++) {
             this.totalPrice += this.clothes[i].price;
         }
     }
 
     buyCart() {
         this.loading = true;
+
+        var self = this;
         this.cartService.buyCart().subscribe(
-            res => {
-                this.totalPrice = 0;
-                this.clothes = [];
-                this.showAlert("Enjoy your new clothes!", true);
-                this.loading = false;
+            function(res) {
+                self.totalPrice = 0;
+                self.clothes = [];
+                self.showAlert("Enjoy your new clothes!", true);
+                self.loading = false;
             },
-            err => {
-                this.showAlert(err.error.message, false);
-                this.loading = false;
+            function(err) {
+                self.showAlert(err.error.message, false);
+                self.loading = false;
             }
         )
     }

@@ -14,14 +14,15 @@ export class UserService {
   constructor(private http: HttpClient) {
     if (this.loggedIn()) {
       this.loadToken();
+      var self = this;
       this.getProfile().subscribe(
-        res => {
-          let user = res["user"];
-          this.user = new User(user.email, user.fullName, user.city, user.address, user.role);
+        function (res) {
+          var user = res["user"];
+          self.user = new User(user.email, user.fullName, user.city, user.address, user.role);
 
-          this.change();
+          self.change();
         },
-        err => {
+        function (err) {
           console.log("auto-login error");
         }
       );
@@ -45,7 +46,7 @@ export class UserService {
 
   getHeaders() {
     if (!this.headers) {
-      let headers = new HttpHeaders();
+      var headers = new HttpHeaders();
       headers = headers.append("authorization", this.token);
       headers = headers.append("Content-Type", "application/json");
 
@@ -77,10 +78,10 @@ export class UserService {
   /*************** PUBLIC ****************/
   register(newUser, cb) {
     this.http.post("http://localhost:3000/user/register", newUser).subscribe(
-      res => {
+      function (res) {
         cb({status: "success"});
       },
-      err => {
+      function (err) {
         cb({status: "error", message: err.error.message});
       }
     )
@@ -90,16 +91,17 @@ export class UserService {
     if (!data)
       data = {token: this.token};
 
+    var self = this;
     this.http.post("http://localhost:3000/user/login", data).subscribe(
-      res => {
-        this.storeUserData(res["token"], res["user"]);
-        this.change();
+      function (res) {
+        self.storeUserData(res["token"], res["user"]);
+        self.change();
 
         if (cb)
           cb({status: "success"});
       },
-      err => {
-        this.token = null;
+      function (err) {
+        self.token = null;
         if (cb)
           cb({status: "error", message: err.error.message});
       });
@@ -107,17 +109,17 @@ export class UserService {
 
   /*************** AUTH ****************/
   getProfile() {
-    let headers = this.getHeaders();
+    var headers = this.getHeaders();
     return this.http.get('http://localhost:3000/user/profile', {headers: headers});
   }
 
   updatePassword(data) {
-    let headers = this.getHeaders();
+    var headers = this.getHeaders();
     return this.http.post("http://localhost:3000/user/updatePassword", data, {headers: headers});
   }
 
   updateProfile(data) {
-    let headers = this.getHeaders();
+    var headers = this.getHeaders();
     return this.http.post("http://localhost:3000/user/updateProfile", data, {headers: headers});
   }
 }

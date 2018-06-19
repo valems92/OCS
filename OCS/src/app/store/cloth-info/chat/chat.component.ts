@@ -25,11 +25,11 @@ export class ChatComponent {
   typing: string = " is typing...";
 
   constructor(private chatService: ChatService, private userService: UserService) {
-    userService.event.subscribe((value) => {
-      this.setUserName(value['user']);
-    });
-
     var self = this;
+
+    userService.event.subscribe(function(value) {
+      self.setUserName(value['user']);
+    });
 
     chatService.newMessageEvent.subscribe(function (data) {
       var message = new Message(null, data['username'], data['message']);

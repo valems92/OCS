@@ -21,8 +21,12 @@ export class ChatService {
 
   sendMessage(id, message) {
     var self = this;
-    this.http.post("http://localhost:3000/message/addMessage", {id: id, username: this.userName, message: message}).subscribe(
-      res => {
+    this.http.post("http://localhost:3000/message/addMessage", {
+      id: id,
+      username: this.userName,
+      message: message
+    }).subscribe(
+      function (res) {
         self.socket.emit('new message', message);
       }
     );
@@ -37,7 +41,7 @@ export class ChatService {
   }
 
   listen() {
-    let self = this;
+    var self = this;
     this.socket.on('new message', function (data) {
       self.newMessageEvent.next(data);
     });
@@ -53,11 +57,11 @@ export class ChatService {
 
   getMessages(id, cb) {
     return this.http.get("http://localhost:3000/message/getMessages/" + id).subscribe(
-      res => {
-        let messages = res["messages"];
+      function(res) {
+        var messages = res["messages"];
         cb({status: "success", messages: messages});
       },
-      err => {
+      function(err) {
         cb({status: "error", message: err.error.message});
       }
     )

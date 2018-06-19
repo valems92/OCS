@@ -46,15 +46,15 @@ export class ClothDataComponent implements OnInit {
     }
 
     encodeImageFileAsURL() {
-        let fileReader = new FileReader();
-
-        fileReader.onload = (e) => {
-            this.imagePath = e.target["result"];
-            if (this.saved)
-                this.save();
+        var fileReader = new FileReader();
+        var self = this;
+        fileReader.onload = function(e) {
+            self.imagePath = e.target["result"];
+            if (self.saved)
+                self.save();
         };
 
-        fileReader.readAsDataURL(this.imageFile);
+        fileReader.readAsDataURL(self.imageFile);
     }
 
     onImageChange(e) {
@@ -75,7 +75,7 @@ export class ClothDataComponent implements OnInit {
     }
 
     save() {
-        let data = {
+        var data = {
             id: this.id,
             cloth: {
                 provider: this.provider,

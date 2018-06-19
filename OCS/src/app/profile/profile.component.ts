@@ -25,13 +25,14 @@ export class ProfileComponent implements OnInit {
     isAlertSuccess: boolean;
 
     constructor(private userService: UserService, private router: Router) {
-        userService.event.subscribe((value) => {
-            this.setUserData(value.user);
+      var self = this;
+        userService.event.subscribe(function(value) {
+            self.setUserData(value.user);
         });
     }
 
     ngOnInit() {
-        let user = this.userService.user;
+        var user = this.userService.user;
         this.setUserData(user);
     }
 
@@ -49,20 +50,21 @@ export class ProfileComponent implements OnInit {
     }
 
     onChangeProfile() {
-        let data = {
+        var data = {
             fullName: this.fullName,
             city: this.city,
             address: this.address
-        }
+        };
 
+        var self = this;
         this.userService.updateProfile(data).subscribe(
-            res => {
-                this.showAlert("Your profile data was changed", true);
-                this.loading = false;
+            function(res) {
+                self.showAlert("Your profile data was changed", true);
+                self.loading = false;
             },
-            err => {
-                this.showAlert(err.error.message, false);
-                this.loading = false;
+            function(err) {
+                self.showAlert(err.error.message, false);
+                self.loading = false;
             }
         )
     }
@@ -74,33 +76,35 @@ export class ProfileComponent implements OnInit {
             return false;
         }
 
-        let data = {
+        var data = {
             oldPassword: this.oldPassword,
             newPassword: this.newPassword
         };
 
+        var self = this;
         this.userService.updatePassword(data).subscribe(
-            res => {
-                this.oldPassword = "";
-                this.newPassword = "";
-                this.showAlert("Your password was changed", true);
-                this.loading = false;
+            function(res) {
+                self.oldPassword = "";
+                self.newPassword = "";
+                self.showAlert("Your password was changed", true);
+                self.loading = false;
             },
-            err => {
-                this.showAlert(err.error.message, false);
-                this.loading = false;
+            function(err) {
+                self.showAlert(err.error.message, false);
+                self.loading = false;
             }
         )
     }
 
     validatePassword() {
-        const regExp = new RegExp((/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/));
+        var regExp = new RegExp((/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/));
         return regExp.test(this.newPassword);
     }
 
     onLogout() {
-        this.userService.logout(() => {
-            this.router.navigate(['./store']);
+      var self = this;
+        this.userService.logout(function() {
+            self.router.navigate(['./store']);
         });
     }
 }

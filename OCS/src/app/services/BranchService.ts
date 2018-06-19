@@ -14,32 +14,33 @@ export class BranchService {
   constructor(private userService: UserService, private http: HttpClient) {
     this.headers = this.userService.getHeaders();
 
+    var self = this;
     this.http.get("http://localhost:3000/branch/getBranches").subscribe(
-      res => {
-        let branches = res["branches"];
+      function (res) {
+        var branches = res["branches"];
 
-        for (let i = 0; i < branches.length; i++) {
-          let branch = branches[i];
-          let branchObj = new Branch(branches._id, branch.lat, branch.lng, branch.title);
-          this.allBranches.push(branchObj);
+        for (var i = 0; i < branches.length; i++) {
+          var branch = branches[i];
+          var branchObj = new Branch(branches._id, branch.lat, branch.lng, branch.title);
+          self.allBranches.push(branchObj);
         }
 
-        this.change();
+        self.change();
       },
-      err => {
+      function (err) {
         console.log("There was an error getting the branches");
       }
     )
   }
 
   addBranch(branch, cb) {
-    const KEY = '831b9384415967d556bb545630af309d';
-    let url = 'http://api.openweathermap.org/data/2.5/weather?lat=' + branch.lat + '&lon=' + branch.lng + '&APPID=' + KEY;
+    var KEY = '831b9384415967d556bb545630af309d';
+    var url = 'http://api.openweathermap.org/data/2.5/weather?lat=' + branch.lat + '&lon=' + branch.lng + '&APPID=' + KEY;
 
-    let self = this;
+    var self = this;
     this.http.get(url).subscribe(
       function (res) {
-        let title = res['name'];
+        var title = res['name'];
         branch.title = title;
 
         self._addBranch(branch, cb);
@@ -50,37 +51,39 @@ export class BranchService {
   }
 
   _addBranch(branch, cb) {
+    var self = this;
     this.http.post("http://localhost:3000/branch/addBranch", branch, {headers: this.headers})
       .subscribe(
-        res => {
-          let branch = res["branch"];
-          let branchObj = new Branch(branch._id, branch.lat, branch.lng, branch.title);
+        function(res) {
+          var branch = res["branch"];
+          var branchObj = new Branch(branch._id, branch.lat, branch.lng, branch.title);
 
-          this.allBranches.push(branchObj);
-          this.change();
+          self.allBranches.push(branchObj);
+          self.change();
 
           cb({status: "success"});
         },
-        err => {
+        function(err) {
           cb({status: "error", message: err.error.message});
         }
       );
   }
 
   deleteBranch(id, cb) {
+    var self = this;
     this.http.delete("http://localhost:3000/branch/deleteBranch/" + id, {headers: this.headers}).subscribe(
-      res => {
-        for (let i = 0; i < this.allBranches.length; i++) {
-          if (this.allBranches[i].id === id) {
-            this.allBranches.splice(i, 1);
+      function(res) {
+        for (var i = 0; i < self.allBranches.length; i++) {
+          if (self.allBranches[i].id === id) {
+            self.allBranches.splice(i, 1);
             break;
           }
         }
 
-        this.change();
+        self.change();
         cb({status: "success"});
       },
-      err => {
+      function(err) {
         cb({status: "error", message: err.error.message});
       }
     )

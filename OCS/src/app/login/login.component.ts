@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
 
         this.loading = true;
 
-        let newUser = {
+        var newUser = {
             fullName: this.regFullName,
             email: this.regEmail,
             password: this.regPassword,
@@ -62,36 +62,38 @@ export class LoginComponent implements OnInit {
             address: this.regAddress
         };
 
-        this.userService.register(newUser, (data) => {
+        var self = this;
+        this.userService.register(newUser, function(data) {
             if (data.status === "success")
-                this.login(this.regEmail, this.regPassword);
+                self.login(self.regEmail, self.regPassword);
             else {
-                this.showAlert(data.message, false);
-                this.loading = false;
+                self.showAlert(data.message, false);
+                self.loading = false;
             }
         });
     }
 
     validatePassword() {
-        const regExp = new RegExp((/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/));
+        var regExp = new RegExp((/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/));
         return regExp.test(this.regPassword);
     }
 
     login(email, password) {
         this.loading = true;
 
-        let user = {
+        var user = {
             email: email,
             password: password
         };
 
-        this.userService.login(user, (data) => {
+        var self = this;
+        this.userService.login(user, function(data) {
             if (data.status === "success")
-                this.router.navigate(['./store']);
+                self.router.navigate(['./store']);
             else {
-                this.showAlert(data.message, false);
+                self.showAlert(data.message, false);
             }
-            this.loading = false;
+            self.loading = false;
         });
     }
 }

@@ -5,7 +5,6 @@ import {BranchService} from "../services/BranchService";
 import {Branch} from "../models/branch.model";
 import {AlertComponent} from "../shared-components/alert/alert.component";
 
-
 @Component({
   selector: 'app-admin-space',
   templateUrl: './admin-space.component.html',
@@ -25,12 +24,13 @@ export class AdminSpaceComponent implements OnInit {
   isAlertSuccess: string;
 
   constructor(private http: HttpClient, private clothService: ClothService, private branchService: BranchService) {
-    clothService.clothesByProviderChangeEvent.subscribe((value) => {
-      this.providersData = value;
+    var self = this;
+    clothService.clothesByProviderChangeEvent.subscribe(function(value) {
+      self.providersData = value;
     });
 
-    branchService.branchesChangeEvent.subscribe((value) => {
-      this.branches = value;
+    branchService.branchesChangeEvent.subscribe(function(value) {
+      self.branches = value;
     });
   }
 
@@ -53,28 +53,30 @@ export class AdminSpaceComponent implements OnInit {
   onAddNewCloth(data) {
     this.setLoading(true);
 
-    this.clothService.addNewCloth(data.cloth, (res) => {
+    var self = this;
+    this.clothService.addNewCloth(data.cloth, function(res) {
       if (res.status === "error")
-        this.showAlert(res.message, false);
+        self.showAlert(res.message, false);
       else
-        this.showAlert("The cloth was added", true);
+        self.showAlert("The cloth was added", true);
 
 
-      this.setLoading(false);
+      self.setLoading(false);
     });
   }
 
   onAddNewBranch(data) {
     this.setLoading(true);
 
-    this.branchService.addBranch(data, (res) => {
+    var self = this;
+    this.branchService.addBranch(data, function(res) {
       if (res.status === "error")
-        this.showAlert(res.message, false);
+        self.showAlert(res.message, false);
       else
-        this.showAlert("The cloth was added", true);
+        self.showAlert("The cloth was added", true);
 
 
-      this.setLoading(false);
+      self.setLoading(false);
     });
   }
 

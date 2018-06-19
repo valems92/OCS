@@ -14,28 +14,30 @@ export class CartService {
   }
 
   getCart(cb) {
+    var self = this;
     this.http.get("http://localhost:3000/cart/getCart", {headers: this.headers}).subscribe(
-      res => {
-        let cart = res["cart"];
-        cb({status: "success", cart: this.getUserClothes(cart)});
+      function(res) {
+        var cart = res["cart"];
+        cb({status: "success", cart: self.getUserClothes(cart)});
       },
-      err => {
+      function(err) {
         cb({status: "error", message: err.error.message});
       }
     )
   }
 
   getUserClothes(cart) {
-    let cartClothes = [];
+    var cartClothes = [];
 
-    for (let i = 0; i < cart.length; i++) {
+    for (var i = 0; i < cart.length; i++) {
       if (cart[i].status === "waiting") {
         cartClothes.push(cart[i].clothId);
       }
     }
 
-    let cartClothesObj = $.extend(true, [], this.clothService.allClothes);
-    cartClothesObj = cartClothesObj.filter(c => {
+    var cartClothesObj = $.extend(true, [], this.clothService.allClothes);
+
+    cartClothesObj = cartClothesObj.filter(function(c) {
       return cartClothes.indexOf(c.id) > -1;
     });
 
