@@ -7,15 +7,14 @@ import * as $ from 'jquery';
 
 @Injectable()
 export class CartService {
-  headers: HttpHeaders;
 
   constructor(private userService: UserService, private clothService: ClothService, private http: HttpClient) {
-    this.headers = this.userService.getHeaders();
+
   }
 
   getCart(cb) {
     var self = this;
-    this.http.get("http://localhost:3000/cart/getCart", {headers: this.headers}).subscribe(
+    this.http.get("http://localhost:3000/cart/getCart", {headers: this.userService.getHeaders()}).subscribe(
       function(res) {
         var cart = res["cart"];
         cb({status: "success", cart: self.getUserClothes(cart)});
@@ -45,22 +44,22 @@ export class CartService {
   }
 
   addToCart(clothId) {
-    return this.http.post("http://localhost:3000/cart/addToCart", {clothId: clothId}, {headers: this.headers});
+    return this.http.post("http://localhost:3000/cart/addToCart", {clothId: clothId}, {headers: this.userService.getHeaders()});
   }
 
   removeFromCart(clothId) {
-    return this.http.delete("http://localhost:3000/cart/removeFromCart/" + clothId, {headers: this.headers});
+    return this.http.delete("http://localhost:3000/cart/removeFromCart/" + clothId, {headers: this.userService.getHeaders()});
   }
 
   buyCart() {
-    return this.http.post("http://localhost:3000/cart/buyCart", {}, {headers: this.headers});
+    return this.http.post("http://localhost:3000/cart/buyCart", {}, {headers: this.userService.getHeaders()});
   }
 
   getUserPurchases() {
-    return this.http.get("http://localhost:3000/cart/getPurchases", {headers: this.headers});
+    return this.http.get("http://localhost:3000/cart/getPurchases", {headers: this.userService.getHeaders()});
   }
 
   getAllPurchases() {
-    return this.http.get("http://localhost:3000/cart/getAllPurchases", {headers: this.headers});
+    return this.http.get("http://localhost:3000/cart/getAllPurchases", {headers: this.userService.getHeaders()});
   }
 }

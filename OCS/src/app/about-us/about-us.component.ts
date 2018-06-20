@@ -29,6 +29,9 @@ export class AboutUsComponent implements OnInit {
 
   ngOnInit() {
     this.branches = this.branchService.allBranches;
+    if (this.branches && this.branches.length > 0) {
+      this.addMarkers();
+    }
   }
 
   initMap(branch) {
